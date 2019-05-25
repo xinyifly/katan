@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Candidates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Candidate</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @candidates.each do |candidate| %>
+      <tr>
+        <td><%= candidate %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
