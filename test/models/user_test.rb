@@ -15,4 +15,10 @@ class UserTest < ActiveSupport::TestCase
       @user.vote(candidate)
     end
   end
+
+  test "can't vote self" do
+    assert_no_difference('Vote.count') do
+      @user.vote(@user)
+    end
+  end
 end
