@@ -14,4 +14,21 @@ class CandidatesControllerTest < ActionDispatch::IntegrationTest
     get candidates_url
     assert_select 'td', @candidate.email
   end
+
+  test 'should see score' do
+    get candidates_url
+    assert_select 'td', @candidate.score.to_s
+  end
+
+  class LoggedUserTest < ActionDispatch::IntegrationTest
+    setup do
+      @candidate = create(:candidate)
+      sign_in @user = create(:user)
+    end
+
+    test 'should see vote' do
+      get candidates_url
+      assert_select 'a', 'Vote'
+    end
+  end
 end

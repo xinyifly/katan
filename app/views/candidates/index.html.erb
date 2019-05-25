@@ -6,6 +6,10 @@
   <thead>
     <tr>
       <th>Candidate</th>
+      <th>Score</th>
+      <% if current_user %>
+        <th></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -13,6 +17,10 @@
     <% @candidates.each do |candidate| %>
       <tr>
         <td><%= candidate %></td>
+        <td><%= candidate.score %></td>
+        <% if current_user %>
+          <td><%= link_to_vote(candidate.id) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
