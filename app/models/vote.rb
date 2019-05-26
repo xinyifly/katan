@@ -5,8 +5,6 @@ class Vote < ApplicationRecord
   validate :candidate_cannot_be_yourself
 
   def candidate_cannot_be_yourself
-    if candidate == voter
-      errors.add :candidate, "can't be yourself"
-    end
+    errors.add :candidate, "can't be yourself" if candidate == voter
   end
 end
