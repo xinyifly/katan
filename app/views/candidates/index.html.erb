@@ -16,7 +16,7 @@
   <tbody>
     <% @candidates.each do |candidate| %>
       <tr>
-        <td><%= candidate %></td>
+        <td><%= candidate.user.email %></td>
         <td><%= candidate.score %></td>
         <% if current_user %>
           <td><%= link_to_vote(candidate.id) %></td>

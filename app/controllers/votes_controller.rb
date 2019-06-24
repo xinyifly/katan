@@ -7,7 +7,7 @@ class VotesController < ApplicationController
   end
 
   def create
-    candidate = User.find(vote_params[:candidate_id])
+    candidate = Candidate.find(vote_params[:candidate_id])
     @vote = current_user.vote(candidate)
 
     respond_to do |format|

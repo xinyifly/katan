@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CandidatesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @candidate = create(:candidate)
+    @candidate = create(:candidate, poll: nil)
   end
 
   test 'should get index' do
@@ -12,7 +12,7 @@ class CandidatesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should see email' do
     get candidates_url
-    assert_select 'td', @candidate.email
+    assert_select 'td', @candidate.user.email
   end
 
   test 'should see score' do
@@ -22,7 +22,7 @@ class CandidatesControllerTest < ActionDispatch::IntegrationTest
 
   class LoggedUserTest < ActionDispatch::IntegrationTest
     setup do
-      @candidate = create(:candidate)
+      @candidate = create(:candidate, poll: nil)
       sign_in @user = create(:user)
     end
 

@@ -1,5 +1,5 @@
 class CandidatesController < ApplicationController
   def index
-    @candidates = User.all
+    @candidates = Candidate.where(poll: nil)
   end
 end
