@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :polls, only: [:index]
+  resources :polls, only: [:index] do
+    resources :candidates, only: [:index]
+  end
   resources :votes, only: [:create, :new, :show]
   resources :candidates, only: [:index]
   devise_for :users

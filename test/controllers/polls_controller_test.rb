@@ -9,4 +9,14 @@ class PollsControllerTest < ActionDispatch::IntegrationTest
     get polls_url
     assert_response :success
   end
+
+  test 'should see name' do
+    get polls_url
+    assert_select 'td', @poll.name
+  end
+
+  test 'should see candidates' do
+    get polls_url
+    assert_select 'a', 'Candidates'
+  end
 end
