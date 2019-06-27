@@ -4,6 +4,8 @@ class Candidate < ApplicationRecord
 
   has_many :votes
 
+  validates :user, uniqueness: { scope: :poll }
+
   def score
     votes.count
   end
