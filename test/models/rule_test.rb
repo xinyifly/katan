@@ -22,4 +22,32 @@ class RuleTest < ActiveSupport::TestCase
     rule.check_self_vote(vote)
     assert_empty vote.errors
   end
+
+  test 'check candidate voter limit' do
+    poll = create(:poll)
+
+    key = Rule.keys[:candidate_voter_limit]
+    value = '1,P1D' # limit: 1, period: 1 day
+    rule = create(:rule, key: key, value: value, poll: poll)
+
+    candidate = create(:candidate, poll: poll)
+    voter = create(:voter)
+
+    # 0 vote
+    vote = build(:vote, candidate: candidate, voter: voter)
+    rule.check_candidate_voter_limit(vote)
+    assert_empty vote.errors
+
+    # 1 vote before period
+    create(:vote, candidate: candidate, voter: voter, created_at: 2.days.ago)
+    vote = build(:vote, candidate: candidate, voter: voter)
+    rule.check_candidate_voter_limit(vote)
+    assert_empty vote.errors
+
+    # 1 vote in period
+    create(:vote, candidate: candidate, voter: voter)
+    vote = build(:vote, candidate: candidate, voter: voter)
+    rule.check_candidate_voter_limit(vote)
+    assert_not_empty vote.errors
+  end
 end
