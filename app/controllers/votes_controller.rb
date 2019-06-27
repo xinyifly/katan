@@ -11,7 +11,7 @@ class VotesController < ApplicationController
     @vote = current_user.vote(candidate)
 
     respond_to do |format|
-      if @vote.save
+      if @vote.persisted?
         format.html { redirect_to @vote, notice: 'Vote was successfully created.' }
         format.json { render :show, status: :created, location: @vote }
       else
