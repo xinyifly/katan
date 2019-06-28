@@ -1,6 +1,6 @@
 class Candidate < ApplicationRecord
   belongs_to :user
-  belongs_to :poll, optional: true
+  belongs_to :poll
 
   has_many :votes
 
